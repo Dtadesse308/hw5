@@ -1,9 +1,10 @@
 #ifndef WORDLE_H
 #define WORDLE_H
 
-#ifdef RECCHECK
+#ifndef RECCHECK
 #include <set>
 #include <string>
+#include <queue>
 #endif
 
 /**
@@ -21,5 +22,13 @@ std::set<std::string> wordle(
     const std::string& in,
     const std::string& floating,
     const std::set<std::string>& dict);
+
+    void helper(
+     std::string& in,
+     std::queue<char>& floating,
+    const std::set<std::string>& dict,
+    int index, std::set<std::string>& words);
+
+
 
 #endif
