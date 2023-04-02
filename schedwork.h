@@ -37,5 +37,7 @@ bool schedule(
     const size_t maxShifts,
     DailySchedule& sched
 );
+ bool solver (const size_t dailyNeed, const size_t maxShifts, const AvailabilityMatrix& avail,
+        DailySchedule& sched, std::vector<int> shiftsWorked, int row, int col);
 
 #endif
