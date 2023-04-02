@@ -6,10 +6,11 @@
 #include <vector>
 #include <map>
 #include <algorithm>
+#include "schedwork.h"
 #endif
 
 // add or remove necessary headers as you please
-#include "schedwork.h"
+
 
 using namespace std;
 
