@@ -82,7 +82,7 @@ bool schedule(
         
 
 
-    for (int i = 0; i < (int)avail[row].size(); i ++){         //go through all workers
+    for (int i = col; i < (int)avail[row].size(); i ++){         //go through all workers
         //check if they are available 
         if ( (avail[row][i]) && (shiftsWorked[i] < maxShifts) ){
             sched [row][col] = i;
