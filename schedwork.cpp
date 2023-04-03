@@ -43,23 +43,11 @@ bool schedule(
 
 
     //create a vect to track num of shifts per worker
-    vector<int> workersAvail;
+    vector<int> workersAvail (col, 0);
 
-    for (int i = 0; i < col; i++){
-        workersAvail.push_back(0);
-    }
-
-
-    sched.resize(row);
-    for(int i = 0; i < (int)sched.size() ; i++)
-    {
-        sched[i].resize(dailyNeed);
-    }
-    //sched[0].resize(dailyNeed);
-    
-   // std::cout << "printing: "<<sched[1].size() << " " << dailyNeed << std::endl;
-
+   sched.resize(row);
     for (int i = 0; i < row; i++){       //needed per day
+        sched[i].resize(dailyNeed);
         for (int j =0; j < (int)dailyNeed; j++){     //num of days
             sched[i][j] = -1;
         }
