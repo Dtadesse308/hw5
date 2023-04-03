@@ -24,12 +24,30 @@ std::set<std::string> wordle(
 {
     // Add your code here
 
+
+
+
     queue<char>floats;
 
     for (int i = 0; i < (int)floating.size(); i++){
         floats.push(floating[i]);
-        
     }
+		int count = 0;
+
+		for (int i = 0; i < in.size(); i ++){
+			if (in[i] == '-'){
+				count ++;
+			}
+		}
+
+		int remining = count - floating.size() ;
+
+		for (int i = 0 ; i < remining ; i++){
+			floats.push('*');
+		}
+
+
+
 
     
 
@@ -60,27 +78,53 @@ void helper(
 
 
     if (index == (int)in.size()){
-            if (dict.find(in) != dict.end()){
+      //  cout<<in<<endl;
+            if (dict.find(in) != dict.end()){               
                 if (floating.size() == 0){
-                    words.insert(in);       
+                    words.insert(in);     
+
                 }                       
             }
             return;
         }
     
-   if ( (in.size() - index) < floating.size() ){
-            return;
+//    if ( (in.size() - index) < floating.size() ){
+//             return;
         
-        }
+//         }
         
 
     if ( in[index] == '-'){
 
-        
-           
+        for (int i =0; i < floating.size(); i ++){
+            //cout<<floating.size()<<endl;
 
-            queue<char> temp = floating;      //temp set so we dont remove from same set from iteration
-            
+            if (floating.front() != '*'){ 	//if a fixed char
+                in[index] = floating.front();
+                floating.pop();
+                helper (in,floating,dict,index+1,words);    //recurse    
+                floating.push(in[index]);
+                in[index] = '-';
+        }
+        else {
+            floating.pop();
+            for (char i = 'a'; i <= 'z'; i++){
+                in[index] = i;
+                helper (in,floating,dict,index+1,words);    //recurse 
+            }
+            in[index] = '-';
+            floating.push('*');
+        }
+        }
+       
+
+	}
+
+											///old code//
+
+
+                //temp set so we dont remove from same set from iteration
+        /*    
             for (int i = 0; i < (int)floating.size(); i++){         //iterate through floating nums
                 in[index] = temp.front();
                 temp.pop(); 
@@ -96,16 +140,17 @@ void helper(
         if ( (in.size() - index - 1) < floating.size() ){
             return;
         }   
-
-        for (char i = 'a'; i <= 'z'; i++){
+        
+        if ((in.size() - index - 1) >= floating.size()){
+             for (char i = 'a'; i <= 'z'; i++){
             in[index] = i;
             helper (in,floating,dict,index+1,words);    //recurse 
             in[index] = '-';
-        } 
-    
-          
+            } 
+        }
+   */
 
-    }
+    
 
      else  {
         helper (in,floating,dict,index+1,words); 
